@@ -1,7 +1,6 @@
 <template>
   <div class="data">
-    {{name}}
-    <button @click="findData">点击</button>
+
     <div class="shows">
       <ul>
         <li v-for="(data,index) in datas"
@@ -63,7 +62,7 @@ export default {
   },
   data () {
     return {
-      name: 'abc',
+
       datas: [],
       dataShouyi: [],
       addForm: {
