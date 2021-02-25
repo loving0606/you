@@ -9,11 +9,11 @@
     <el-container>
       <!---左侧导航--->
       <el-aside style="width:200px;text-align:left">
-        <el-menu router>
+        <el-menu router
+                 :default-openeds="['1','/home','3','4','5','6','7']">
           <!--有级菜单-->
           <!---用户管理--->
-          <el-submenu index="1"
-                      :default-openeds="['1']">
+          <el-submenu index="1">
             <template slot="title"
                       :default-active="activePath">
               <!-- 图标 -->
@@ -25,7 +25,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class=""></i>
+                <i class="el-icon-s-tools"></i>
                 <!-- 文本 -->
                 <span>管理</span>
               </template>
@@ -33,10 +33,10 @@
           </el-submenu>
           <!---销量-油--->
           <el-submenu index="/home"
-                      :default-openeds="['1']">
+                      :default-openeds="['/home/oil']">
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i class="iconfont icon-xiaoliang1"></i>
               <!-- 文本 -->
               <span>销量-油</span>
             </template>
@@ -212,7 +212,7 @@
         <router-view></router-view>
       </el-main>
     </el-container>
-    <el-footer>Footer</el-footer>
+    <el-footer>版权信息</el-footer>
   </el-container>
 
   <!-- <Data /> -->
@@ -250,6 +250,11 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
+.el-footer {
+  background: #373d41;
+  line-height: 60px;
+  color: #fff;
+}
 .el-container {
   height: 100%;
   background: #eee;
@@ -261,11 +266,13 @@ export default {
 .el-aside .el-menu {
   background: #333744;
   color: #fff;
+  border: none;
 }
 .el-submenu__title,
 .el-menu-item {
   color: #fff;
 }
+
 .el-main {
   background: #e3e6ea;
 }
