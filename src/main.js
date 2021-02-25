@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 // import axios from 'axios'
 import router from './router'
-import { Button, Table, TableColumn, FormItem, Form, Input, Col, TimePicker, DatePicker, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Card, Pagination, Breadcrumb, BreadcrumbItem, Row, Dialog } from 'element-ui'
+import { Button, Table, TableColumn, FormItem, Form, Input, Col, TimePicker, DatePicker, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Card, Pagination, Breadcrumb, BreadcrumbItem, Row, Dialog, Footer } from 'element-ui'
 
 Vue.config.productionTip = false
     // Vue.prototype.$axios = axios
@@ -30,6 +30,7 @@ Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Row)
 Vue.use(Dialog)
+Vue.use(Footer)
 new Vue({
     render: h => h(App),
     router
