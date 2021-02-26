@@ -1,17 +1,22 @@
 <template>
   <div class="data">
-
-    <el-card>
-      <!-- 面包屑导航区域 -->
+<!-- 面包屑导航区域 -->
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+  
         <el-breadcrumb-item>销量-油</el-breadcrumb-item>
         <el-breadcrumb-item>油表剩余数字显示</el-breadcrumb-item>
       </el-breadcrumb>
+      <div style="text-align:left;margin-bottom:30px;"><el-button type="primary"
+                   @click="addShow = true">新增数据</el-button></div>
+    <el-card>
+      
       <el-row>
         <!-- <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button> -->
-        <el-button type="primary"
-                   @click="addShow = true">新增数据</el-button>
+        
+
+        <!-- <el-button :plain="true"
+                   @click="succ">新增数据</el-button> -->
+
         <!-- <el-button type="success">成功按钮</el-button>
           <el-button type="info">信息按钮</el-button>
           <el-button type="warning">警告按钮</el-button>
@@ -246,7 +251,10 @@ export default {
           axios.post('/api/shouyi', qs.stringify(this.addForm)).then(res => {
             console.log(res)
             if (res.status === 200) {
+              this.succ('恭喜，添加成功！')
               this.findData()
+            } else {
+              this.fail('对不起，添加失败')
             }
           })
         }
@@ -262,8 +270,7 @@ export default {
       const ids = id
       axios.post('/api/findEdit', qs.stringify({ _id: ids })).then(res => {
         if (res.status === 200) {
-          // console.log('===================')
-          console.log(res.data)
+          // console.log(res.data)
           this.editForm = res.data
           this.findData()
         }
@@ -273,11 +280,11 @@ export default {
     editUpdate () {
       this.editShow = false
       axios.post('/api/updateEdit', qs.stringify(this.editForm)).then(res => {
-
         if (res.status === 200) {
-          console.log('========================')
+          this.succ('恭喜，编辑成功！')
           this.findData()
-
+        } else {
+          this.fail('对不起，编辑失败')
         }
       })
     },
@@ -321,6 +328,20 @@ export default {
     //关闭新增数据对话框同时把数据清空
     addressDialogClosed () {
       this.$refs.dataFormRef.resetFields()
+    },
+    //弹出成功消息
+    succ (msg) {
+      this.$message({
+        message: msg,
+        type: 'success'
+      })
+    },
+    //弹出制作消息
+    fail (msg) {
+      this.$message({
+        message: msg,
+        type: 'error'
+      })
     }
   },
   filters: {

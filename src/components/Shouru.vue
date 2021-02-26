@@ -1,15 +1,18 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <!-- <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item> -->
       <el-breadcrumb-item>收入</el-breadcrumb-item>
       <el-breadcrumb-item>各方面收入情况</el-breadcrumb-item>
     </el-breadcrumb>
+    <div style="text-align:left;margin-bottom:30px;">
+    <el-button type="primary"
+                   @click="addShow = true">新增数据</el-button>
+    </div>
     <el-card>
       <el-row>
         <!-- <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button> -->
-        <el-button type="primary"
-                   @click="addShow = true">新增数据</el-button>
+        
         <!-- <el-button type="success">成功按钮</el-button>
           <el-button type="info">信息按钮</el-button>
           <el-button type="warning">警告按钮</el-button>

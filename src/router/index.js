@@ -4,12 +4,19 @@ import Data from '../components/OilData.vue'
 import Shouru from '../components/Shouru.vue'
 import Home from '../components/Home.vue'
 import OilSale from '../components/OilSale.vue'
+import Urea1 from '../components/urea/Urea1.vue'
+import Urea2 from '../components/urea/Urea2.vue'
+import Welcome from '../components/Welcome.vue'
 // import App from './App.vue'
 
 Vue.use(Router)
 Vue.use(Data)
 Vue.use(Shouru)
 Vue.use(OilSale)
+Vue.use(Home)
+Vue.use(Urea1)
+Vue.use(Urea2)
+Vue.use(Welcome)
 const routes = [{
         path: '/',
         redirect: '/home'
@@ -17,17 +24,27 @@ const routes = [{
     {
         path: '/home',
         component: Home,
+        redirect: '/welcome',
         children: [{
-            path: '/home/oil',
+            path: '/welcome',
+            component: Welcome
+        }, {
+            path: '/oil',
             component: Data
         }, {
 
-            path: '/home/shouru',
+            path: '/shouru',
             component: Shouru
 
         }, {
-            path: '/home/oilsale',
+            path: '/oilsale',
             component: OilSale
+        }, {
+            path: '/urea1',
+            component: Urea1
+        }, {
+            path: '/urea2',
+            component: Urea2
         }]
     }
 

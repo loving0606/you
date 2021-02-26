@@ -33,27 +33,27 @@
           </el-submenu>
           <!---销量-油--->
           <el-submenu index="/home"
-                      :default-openeds="['/home/oil']">
+                      :default-openeds="['/oil']">
             <template slot="title">
               <!-- 图标 -->
               <i class="iconfont icon-xiaoliang1"></i>
               <!-- 文本 -->
               <span>销量-油</span>
             </template>
-            <el-menu-item index="/home/oil">
+            <el-menu-item index="/oil">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-shenghuochongyouqia"></i>
                 <!-- 文本 -->
                 <span>油表剩余数字显示</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="/home/oilsale">
+            <el-menu-item index="/oilsale">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-xiaoliangdinghuo"></i>
                 <!-- 文本 -->
                 <span>油表每天卖出数量</span>
               </template>
@@ -64,26 +64,26 @@
                       :default-openeds="['1']">
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i class="iconfont icon-xiaoliangzuigao"></i>
               <!-- 文本 -->
               <span>销量-尿素</span>
             </template>
-            <el-menu-item index="3-1">
+            <el-menu-item index="/urea1">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-ziyuan"></i>
                 <!-- 文本 -->
-                <span>进货，出货情况</span>
+                <span>102号油销售情况</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="3-2">
+            <el-menu-item index="/urea2">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-chuhuo1"></i>
                 <!-- 文本 -->
-                <span>尿素数量数据</span>
+                <span>310号油销售情况</span>
               </template>
             </el-menu-item>
           </el-submenu>
@@ -96,11 +96,11 @@
               <!-- 文本 -->
               <span>收入</span>
             </template>
-            <el-menu-item index="/home/shouru">
+            <el-menu-item index="/shouru">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class=""></i>
+                <i class="el-icon-coin"></i>
                 <!-- 文本 -->
                 <span>各方面收入情况</span>
               </template>
@@ -109,7 +109,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class=""></i>
+                <i class="el-icon-coin"></i>
                 <!-- 文本 -->
                 <span>尿素数量数据</span>
               </template>
@@ -120,7 +120,7 @@
                       :default-openeds="['1']">
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i class="iconfont icon-youka"></i>
               <!-- 文本 -->
               <span>油卡</span>
             </template>
@@ -129,7 +129,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-shenghuochongyouqia"></i>
                 <!-- 文本 -->
                 <span>油卡情况1</span>
               </template>
@@ -138,7 +138,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-jiayouqia"></i>
                 <!-- 文本 -->
                 <span>油卡情况2</span>
               </template>
@@ -150,7 +150,7 @@
                       :default-openeds="['1']">
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i class="iconfont icon-kehu2"></i>
               <!-- 文本 -->
               <span>大客户管理</span>
             </template>
@@ -159,7 +159,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-kehu1"></i>
                 <!-- 文本 -->
                 <span>大客户管理1</span>
               </template>
@@ -168,7 +168,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class="el-icon-location"></i>
+                <i class="iconfont icon-customer1"></i>
                 <!-- 文本 -->
                 <span>大客户管理2</span>
               </template>
@@ -180,7 +180,7 @@
                       :default-openeds="['1']">
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-share"></i>
+              <i class="iconfont icon-huibao"></i>
               <!-- 文本 -->
               <span>汇报</span>
             </template>
@@ -189,7 +189,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class=""></i>
+                <i class="iconfont icon-gongzuohuibao"></i>
                 <!-- 文本 -->
                 <span>汇报1</span>
               </template>
@@ -198,7 +198,7 @@
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
-                <i class=""></i>
+                <i class="iconfont icon-xiaoliang"></i>
                 <!-- 文本 -->
                 <span>汇报2</span>
               </template>
