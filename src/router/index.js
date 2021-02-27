@@ -7,6 +7,7 @@ import OilSale from '../components/OilSale.vue'
 import Urea1 from '../components/urea/Urea1.vue'
 import Urea2 from '../components/urea/Urea2.vue'
 import Welcome from '../components/Welcome.vue'
+import Cards from '../components/cards/Cards.vue'
 // import App from './App.vue'
 
 Vue.use(Router)
@@ -17,6 +18,7 @@ Vue.use(Home)
 Vue.use(Urea1)
 Vue.use(Urea2)
 Vue.use(Welcome)
+Vue.use(Cards)
 const routes = [{
         path: '/',
         redirect: '/home'
@@ -45,6 +47,9 @@ const routes = [{
         }, {
             path: '/urea2',
             component: Urea2
+        }, {
+            path: '/cards',
+            component: Cards
         }]
     }
 

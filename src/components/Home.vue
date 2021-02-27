@@ -105,15 +105,15 @@
                 <span>各方面收入情况</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="4-2">
-              <!-- 二级菜单模板 -->
-              <template>
-                <!-- 图标 -->
-                <i class="el-icon-coin"></i>
-                <!-- 文本 -->
-                <span>尿素数量数据</span>
-              </template>
-            </el-menu-item>
+            <!-- <el-menu-item index="4-2">-->
+            <!-- 二级菜单模板 -->
+            <!-- <template> -->
+            <!-- 图标 -->
+            <!-- <i class="el-icon-coin"></i> -->
+            <!-- 文本 -->
+            <!-- <span>尿素数量数据</span> -->
+            <!-- </template> -->
+            <!-- </el-menu-item> -->
           </el-submenu>
           <!---油卡--->
           <el-submenu index="5"
@@ -125,22 +125,13 @@
               <span>油卡</span>
             </template>
 
-            <el-menu-item index="5-1">
+            <el-menu-item index="/cards">
               <!-- 二级菜单模板 -->
               <template>
                 <!-- 图标 -->
                 <i class="iconfont icon-shenghuochongyouqia"></i>
                 <!-- 文本 -->
-                <span>油卡情况1</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="5-2">
-              <!-- 二级菜单模板 -->
-              <template>
-                <!-- 图标 -->
-                <i class="iconfont icon-jiayouqia"></i>
-                <!-- 文本 -->
-                <span>油卡情况2</span>
+                <span>油卡使用记录</span>
               </template>
             </el-menu-item>
 

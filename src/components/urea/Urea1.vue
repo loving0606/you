@@ -2,21 +2,21 @@
   <div>
 
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <!-- <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item> -->
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>销量-尿素</el-breadcrumb-item>
       <el-breadcrumb-item>102号油销售情况</el-breadcrumb-item>
     </el-breadcrumb>
     <div style="text-align:left">
-    <el-button type="primary"
-                   @click="addShow = true">新增数据</el-button>
-                   </div>
+      <el-button type="primary"
+                 @click="addShow = true">新增数据</el-button>
+    </div>
     <el-card>
       <el-table :data='dataShow'>
         <el-table-column prop="date"
                          label='创建日期'>
-                         <template slot-scope="scope">
-                         {{scope.row.date | dateFormat}}
-                         </template>
+          <template slot-scope="scope">
+            {{scope.row.date | dateFormat}}
+          </template>
         </el-table-column>
         <el-table-column prop="enter"
                          label='进货'>
@@ -48,42 +48,67 @@
       </el-pagination>
     </el-card>
     <!--------新增对话框--------->
-    <el-dialog title="新增数据" :visible.sync="addShow" width="30%"  @close="addressDialogClosed">
-        <el-form ref="dataFormRef" :model="addForm">
-            <el-form-item label="进货" prop="enter">
-                <el-input v-model="addForm.enter"></el-input>
-            </el-form-item>
-            <el-form-item label="出货" prop="out">
-                <el-input v-model="addForm.out"></el-input>
-            </el-form-item>
-            <el-form-item label="数据日期" prop="date">
-                <el-date-picker placeholder="选择日期" v-model="addForm.date" style="width:100%" type="date">
-                </el-date-picker>
-            </el-form-item>
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="addShow = false">取 消</el-button>
-          <el-button type="primary"  @click="addData">确 定</el-button>
-        </span>
+    <el-dialog title="新增数据"
+               :visible.sync="addShow"
+               width="30%"
+               @close="addressDialogClosed">
+      <el-form ref="dataFormRef"
+               :model="addForm"
+               :rules="addFormRules">
+        <el-form-item label="进货"
+                      prop="enter">
+          <el-input v-model="addForm.enter"></el-input>
+        </el-form-item>
+        <el-form-item label="出货"
+                      prop="out">
+          <el-input v-model="addForm.out"></el-input>
+        </el-form-item>
+        <el-form-item label="数据日期"
+                      prop="date">
+          <el-date-picker placeholder="选择日期"
+                          v-model="addForm.date"
+                          style="width:100%"
+                          type="date">
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="addShow = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="addData">确 定</el-button>
+      </span>
     </el-dialog>
     <!--------编辑对话框--------->
-    <el-dialog title="编辑数据" :visible.sync="editShow" width="30%"  @close="editDialogClosed">
-        <el-form ref="editDataFormRef" :model="editForm">
-            <el-form-item label="进货" prop="enter">
-                <el-input v-model="editForm.enter"></el-input>
-            </el-form-item>
-            <el-form-item label="出货" prop="out">
-                <el-input v-model="editForm.out"></el-input>
-            </el-form-item>
-            <el-form-item label="数据日期" prop="date">
-                <el-date-picker placeholder="选择日期" v-model="editForm.date" style="width:100%" type="date">
-                </el-date-picker>
-            </el-form-item>
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="editShow = false">取 消</el-button>
-          <el-button type="primary"  @click="editData">确 定</el-button>
-        </span>
+    <el-dialog title="编辑数据"
+               :visible.sync="editShow"
+               width="30%"
+               @close="editDialogClosed">
+      <el-form ref="editDataFormRef"
+               :model="editForm">
+        <el-form-item label="进货"
+                      prop="enter">
+          <el-input v-model="editForm.enter"></el-input>
+        </el-form-item>
+        <el-form-item label="出货"
+                      prop="out">
+          <el-input v-model="editForm.out"></el-input>
+        </el-form-item>
+        <el-form-item label="数据日期"
+                      prop="date">
+          <el-date-picker placeholder="选择日期"
+                          v-model="editForm.date"
+                          style="width:100%"
+                          type="date">
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="editShow = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="editData">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -95,15 +120,21 @@ export default {
     return {
       datas: [],
       addForm: {
-        enter:0,
-        out:0,
-        date:new Date()
+        enter: 0,
+        out: 0,
+        date: new Date()
       },
-      editForm:{
-        enter:0,
-        out:0,
-        date:new Date(),
-        _id:''
+      // 添加表单的验证规则对象
+      addFormRules: {
+        enter: [
+          { type: 'number', required: false, message: '请输入数字类型', trigger: 'blur,change' }
+        ]
+      },
+      editForm: {
+        enter: 0,
+        out: 0,
+        date: new Date(),
+        _id: ''
       },
       //数据总条数
       total: 0,
@@ -120,7 +151,7 @@ export default {
       //将数据转为数组
       dataArray: [],
       addShow: false,
-      editShow:false
+      editShow: false
     }
   },
   created () {
@@ -138,43 +169,43 @@ export default {
       })
     },
     //新增数据
-    addData(){
-        this.addShow = false
-        let url='/api/addUrea1'
-        axios.post(url,qs.stringify(this.addForm)).then(res=>{
-          if(res.status === 200){
-              this.succ('恭喜，添加成功！')
-              this.findAll()
-          }else{
-              this.fail('对不起，添加失败')
-          }
-        })
+    addData () {
+      this.addShow = false
+      let url = '/api/addUrea1'
+      axios.post(url, qs.stringify(this.addForm)).then(res => {
+        if (res.status === 200) {
+          this.succ('恭喜，添加成功！')
+          this.findAll()
+        } else {
+          this.fail('对不起，添加失败')
+        }
+      })
     },
     //编辑某天的数据,先查询当天的数据
     edit (id) {
-        this.editShow = true
-        console.log(id)
-        let url = '/api/findOneUrea1'
-        axios.post(url,qs.stringify({_id:id})).then(res=>{
-           if(res.status === 200){
-              this.editForm = res.data
-           }
-        })
+      this.editShow = true
+      console.log(id)
+      let url = '/api/findOneUrea1'
+      axios.post(url, qs.stringify({ _id: id })).then(res => {
+        if (res.status === 200) {
+          this.editForm = res.data
+        }
+      })
     },
     //确定编辑数据
-    editData(){
-        this.editShow = false
-        let url='/api/editUrea1'
-        console.log('============')
-        axios.post(url,qs.stringify(this.editForm)).then(res=>{
-          console.log(res.status)
-              if(res.status === 200){
-                  this.succ('恭喜，编辑成功！')
-                  this.findAll()
-              }else{
-                  this.fail('对不起，编辑失败')
-              }
-        })
+    editData () {
+      this.editShow = false
+      let url = '/api/editUrea1'
+      console.log('============')
+      axios.post(url, qs.stringify(this.editForm)).then(res => {
+        console.log(res.status)
+        if (res.status === 200) {
+          this.succ('恭喜，编辑成功！')
+          this.findAll()
+        } else {
+          this.fail('对不起，编辑失败')
+        }
+      })
     },
     //计算分页，及存入数据
     pageData () {
@@ -215,7 +246,7 @@ export default {
     addressDialogClosed () {
       this.$refs.dataFormRef.resetFields()
     },
-    editDialogClosed(){
+    editDialogClosed () {
       this.$refs.editDataFormRef.resetFields()
     },
     //弹出成功消息
@@ -259,7 +290,7 @@ export default {
 .el-breadcrumb {
   padding-bottom: 30px;
 }
-.el-card{
-  margin-top:30px;
+.el-card {
+  margin-top: 30px;
 }
 </style>

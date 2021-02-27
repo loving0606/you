@@ -7,13 +7,13 @@
       </ul>
     </div> -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-        <!-- <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item> -->
-        <el-breadcrumb-item>销量-油</el-breadcrumb-item>
-        <el-breadcrumb-item>油表每天卖出数量</el-breadcrumb-item>
-      </el-breadcrumb>
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>销量-油</el-breadcrumb-item>
+      <el-breadcrumb-item>油表每天卖出数量</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card>
       <!-- 面包屑导航区域 -->
-      
+
       <el-table :data="dataShow">
         <el-table-column prop='date'
                          label='日期'>
@@ -198,7 +198,7 @@ a {
 .el-table {
   padding-top: 30px;
 }
-.el-breadcrumb{
-  margin-bottom:30px;
+.el-breadcrumb {
+  margin-bottom: 30px;
 }
 </style>

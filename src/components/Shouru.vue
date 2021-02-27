@@ -1,24 +1,17 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <!-- <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item> -->
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>收入</el-breadcrumb-item>
       <el-breadcrumb-item>各方面收入情况</el-breadcrumb-item>
     </el-breadcrumb>
     <div style="text-align:left;margin-bottom:30px;">
-    <el-button type="primary"
+      <el-row>
+        <el-button type="primary"
                    @click="addShow = true">新增数据</el-button>
+      </el-row>
     </div>
     <el-card>
-      <el-row>
-        <!-- <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button> -->
-        
-        <!-- <el-button type="success">成功按钮</el-button>
-          <el-button type="info">信息按钮</el-button>
-          <el-button type="warning">警告按钮</el-button>
-          <el-button type="danger">危险按钮</el-button> -->
-      </el-row>
-
       <el-table :data="dataShow"
                 style="width:100%">
         <el-table-column prop="date"
@@ -41,6 +34,18 @@
         </el-table-column>
         <el-table-column prop="money"
                          label="现金">
+        </el-table-column>
+        <el-table-column prop="totals"
+                         label="总收入">
+        </el-table-column>
+        <el-table-column fixed="right"
+                         label="操作"
+                         width="100">
+          <template slot-scope="scope">
+            <el-button type="text"
+                       size="small"
+                       @click="edit(scope.row._id)">编辑</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -101,23 +106,23 @@
       <el-form ref="dataFormRef"
                :model='addForm'>
         <el-form-item label="微信一"
-                      prop="oil1">
+                      prop="weixin1">
           <el-input v-model="addForm.weixin1"></el-input>
         </el-form-item>
         <el-form-item label="微信二"
-                      prop="oil2">
+                      prop="weixin2">
           <el-input v-model="addForm.weixin2"></el-input>
         </el-form-item>
         <el-form-item label="微信三"
-                      prop="oil3">
+                      prop="weixin3">
           <el-input v-model="addForm.weixin3"></el-input>
         </el-form-item>
         <el-form-item label="支付宝"
-                      prop="oil4">
+                      prop="alipy">
           <el-input v-model="addForm.alipay"></el-input>
         </el-form-item>
         <el-form-item label="现金"
-                      prop="oil5">
+                      prop="money">
           <el-input v-model="addForm.money"></el-input>
         </el-form-item>
         <el-form-item label="数据日期"
@@ -141,6 +146,54 @@
                    @click='addDatas'>确 定</el-button>
       </span>
     </el-dialog>
+    <!--------编辑数据对话框-------->
+    <el-dialog title="编辑数据"
+               :visible.sync="editShow"
+               width="30%"
+               @close="editDialogClosed">
+      <el-form ref="dataFormRef"
+               :model='editForm'>
+        <el-form-item label="微信一"
+                      prop="weixin1">
+          <el-input v-model="editForm.weixin1"></el-input>
+        </el-form-item>
+        <el-form-item label="微信二"
+                      prop="weixin2">
+          <el-input v-model="editForm.weixin2"></el-input>
+        </el-form-item>
+        <el-form-item label="微信三"
+                      prop="weixin3">
+          <el-input v-model="editForm.weixin3"></el-input>
+        </el-form-item>
+        <el-form-item label="支付宝"
+                      prop="alipay">
+          <el-input v-model="editForm.alipay"></el-input>
+        </el-form-item>
+        <el-form-item label="现金"
+                      prop="money">
+          <el-input v-model="editForm.money"></el-input>
+        </el-form-item>
+        <!-- <el-form-item label="数据日期"
+                      prop="date">
+
+          <el-col :span="11">
+            <el-form-item prop="date">
+              <el-date-picker placeholder="选择日期"
+                              v-model="editForm.date"
+                              style="width: 100%;"
+                              type='date'>
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-form-item> -->
+      </el-form>
+      <span slot="footer"
+            class="dialog-footer">
+        <el-button @click="editShow = false">取 消</el-button>
+        <el-button type="primary"
+                   @click='editDatas'>确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -159,6 +212,15 @@ export default {
         alipay: 0,
         money: 0,
         date: new Date()
+      },
+
+      editForm: {
+        weixin1: 0,
+        weixin2: 0,
+        weixin3: 0,
+        alipay: 0,
+        money: 0,
+        _id: ''
       },
       rules: {
 
@@ -206,23 +268,57 @@ export default {
     addDatas () {
       console.log(this.addForm.weixin1)
       console.log(this.addForm.date)
-      this.addShow = false
+
       let url = '/api/addShouru'
-      console.log('====================')
+
       axios.post(url, qs.stringify(this.addForm)).then(res => {
 
         if (res.status === 200) {
-          // console.log('====================')
 
+          this.addShow = false
           this.getDatas()
+          this.succ('恭喜，添加成功')
         }
 
       }).catch(err => {
-        console.log('--------------------')
         console.log(err)
       })
     },
+    //编辑数据前查询要编辑的这条数据
+    edit (id) {
+      this.editShow = true
+      let url = '/api/shouruOneData'
+      axios.post(url, qs.stringify({ _id: id })).then(res => {
+        if (res.status === 200) {
+          console.log("================")
+          console.log(res.data)
+          this.editForm = res.data
+          console.log(this.editForm)
+        }
+      })
+    },
+    //提交编辑请求
+    editDatas () {
+      this.editShow = false
+      let url = '/api/editShouruData'
+
+
+      axios.post(url, qs.stringify(this.editForm)).then(res => {
+        if (res.status === 200) {
+          this.succ('恭喜，编辑成功！')
+          this.getDatas()
+        } else {
+          this.fail('对不起，编辑失败')
+        }
+      })
+
+
+
+    },
     addressDialogClosed () {
+      this.$refs.dataFormRef.resetFields()
+    },
+    editDialogClosed () {
       this.$refs.dataFormRef.resetFields()
     },
     pageData () {
@@ -246,6 +342,20 @@ export default {
       console.log(newPage)
       this.currentPage = newPage
       this.dataShow = this.totalPage[this.currentPage - 1]
+    },
+    //弹出成功消息
+    succ (msg) {
+      this.$message({
+        message: msg,
+        type: 'success'
+      })
+    },
+    //弹出制作消息
+    fail (msg) {
+      this.$message({
+        message: msg,
+        type: 'error'
+      })
     }
   },
   //过滤器，设置日期格式

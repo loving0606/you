@@ -3,8 +3,8 @@
 
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>销量-尿素</el-breadcrumb-item>
-      <el-breadcrumb-item>310号油销售情况</el-breadcrumb-item>
+      <el-breadcrumb-item>油卡</el-breadcrumb-item>
+      <el-breadcrumb-item>油卡使用记录</el-breadcrumb-item>
     </el-breadcrumb>
     <div style="text-align:left">
       <el-button type="primary"
@@ -53,15 +53,26 @@
                width="30%"
                @close="addressDialogClosed">
       <el-form ref="dataFormRef"
-               :model="addForm"
-               :rules="addFormRules">
-        <el-form-item label="进货"
-                      prop="enter">
-          <el-input v-model="addForm.enter"></el-input>
+               :model="addForm">
+        <el-form-item label="万能卡"
+                      prop="wanneng">
+          <el-input v-model="addForm.wanneng"></el-input>
         </el-form-item>
-        <el-form-item label="出货"
-                      prop="out">
-          <el-input v-model="addForm.out"></el-input>
+        <el-form-item label="汇惠卡"
+                      prop="huihui">
+          <el-input v-model="addForm.huihui"></el-input>
+        </el-form-item>
+        <el-form-item label="吕昌"
+                      prop="lvchang">
+          <el-input v-model="addForm.lvchang "></el-input>
+        </el-form-item>
+        <el-form-item label="中天"
+                      prop="zhongtian">
+          <el-input v-model="addForm.zhongtian "></el-input>
+        </el-form-item>
+        <el-form-item label="国卡"
+                      prop="guoka">
+          <el-input v-model="addForm.guoka "></el-input>
         </el-form-item>
         <el-form-item label="数据日期"
                       prop="date">
@@ -76,11 +87,11 @@
             class="dialog-footer">
         <el-button @click="addShow = false">取 消</el-button>
         <el-button type="primary"
-                   @click="addData">确 定</el-button>
+                   @click="addCardData">确 定</el-button>
       </span>
     </el-dialog>
     <!--------编辑对话框--------->
-    <el-dialog title="编辑数据"
+    <!-- <el-dialog title="编辑数据"
                :visible.sync="editShow"
                width="30%"
                @close="editDialogClosed">
@@ -109,7 +120,7 @@
         <el-button type="primary"
                    @click="editData">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 <script>
@@ -120,16 +131,15 @@ export default {
     return {
       datas: [],
       addForm: {
-        enter: 0,
-        out: 0,
+        wanneng: 0,
+        huihui: 0,
+        lvchang: 0,
+        zhongtian: 0,
+        guoka: 0,
         date: new Date()
       },
       // 添加表单的验证规则对象
-      addFormRules: {
-        enter: [
-          { type: 'number', required: false, message: '请输入数字类型', trigger: 'blur,change' }
-        ]
-      },
+
       editForm: {
         enter: 0,
         out: 0,
@@ -155,12 +165,12 @@ export default {
     }
   },
   created () {
-    this.findAll()
+    // this.findAll()
   },
   methods: {
     //查询所有数据
     findAll () {
-      let url = '/api/urea2'
+      let url = '/api/urea1'
       axios.get(url).then(res => {
         // console.log(res.data)
         this.datas = res.data
@@ -169,44 +179,46 @@ export default {
       })
     },
     //新增数据
-    addData () {
+    addCardData () {
       this.addShow = false
-      let url = '/api/addUrea2'
+      console.log('==================')
+      console.log(this.addForm)
+      let url = '/api/addCardData'
       axios.post(url, qs.stringify(this.addForm)).then(res => {
         if (res.status === 200) {
           this.succ('恭喜，添加成功！')
-          this.findAll()
+          // this.findAll()
         } else {
           this.fail('对不起，添加失败')
         }
       })
     },
     //编辑某天的数据,先查询当天的数据
-    edit (id) {
-      this.editShow = true
-      console.log(id)
-      let url = '/api/findOneUrea2'
-      axios.post(url, qs.stringify({ _id: id })).then(res => {
-        if (res.status === 200) {
-          this.editForm = res.data
-        }
-      })
-    },
+    // edit (id) {
+    //   this.editShow = true
+    //   console.log(id)
+    //   let url = '/api/findOneUrea1'
+    //   axios.post(url, qs.stringify({ _id: id })).then(res => {
+    //     if (res.status === 200) {
+    //       this.editForm = res.data
+    //     }
+    //   })
+    // },
     //确定编辑数据
-    editData () {
-      this.editShow = false
-      let url = '/api/editUrea2'
-      console.log('============')
-      axios.post(url, qs.stringify(this.editForm)).then(res => {
-        console.log(res.status)
-        if (res.status === 200) {
-          this.succ('恭喜，编辑成功！')
-          this.findAll()
-        } else {
-          this.fail('对不起，编辑失败')
-        }
-      })
-    },
+    // editData () {
+    //   this.editShow = false
+    //   let url = '/api/editUrea1'
+    //   console.log('============')
+    //   axios.post(url, qs.stringify(this.editForm)).then(res => {
+    //     console.log(res.status)
+    //     if (res.status === 200) {
+    //       this.succ('恭喜，编辑成功！')
+    //       this.findAll()
+    //     } else {
+    //       this.fail('对不起，编辑失败')
+    //     }
+    //   })
+    // },
     //计算分页，及存入数据
     pageData () {
 
